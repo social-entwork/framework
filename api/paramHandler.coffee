@@ -5,20 +5,20 @@ class ParamHandler
 		@params = params
 		
 	has: (key) ->
-		if key.indexOf(".") > -1
+		if key.indexOf('.') > -1
 			cur = @params
-			for val in key.split(".")
+			for val in key.split '.'
 				cur = cur[val]
-				if typeof cur[val] == "undefined"
+				if typeof cur[val] == 'undefined'
 					return false
 			return true
 		else
-			return typeof @params[key] != "undefined"
+			return typeof @params[key] != 'undefined'
 	
 	get: (key) ->
-		if key.indexOf(".") > -1
+		if key.indexOf('.') > -1
 			cur = @params
-			for val in key.split(".")
+			for val in key.split '.'
 				cur = cur[val]
 				if !cur?
 					break
@@ -31,53 +31,53 @@ class Param
 		@param = param
 		
 	as: (type, _default) ->
-		if typeof type == "string" then type = type.toLowerCase()
+		if typeof type == 'string' then type = type.toLowerCase()
 		switch type
-			when Object, "object"
-				if typeof @param == "object"
+			when Object, 'object'
+				if typeof @param == 'object'
 					return @param
 				else
 					return {}
 			
-			when Boolean, "boolean"
-				if typeof @param == "boolean"
+			when Boolean, 'boolean'
+				if typeof @param == 'boolean'
 					@param
-				else if @param == "true" || @param == "1"
+				else if @param == 'true' || @param == '1'
 					true
-				else if @param == "false" || @param == "0"
+				else if @param == 'false' || @param == '0'
 					false
-				else if typeof _default != "undefined"
+				else if typeof _default != 'undefined'
 					_default
 				else
 					false
 					
-			when Number, "number"
-				if typeof @param == "number"
+			when Number, 'number'
+				if typeof @param == 'number'
 					return @param					
 				else
 					float = parseFloat @param
 					if !isNaN(float) && isFinite(@param)
 						return float
-					else if typeof _default != "undefined"
+					else if typeof _default != 'undefined'
 						return _default
 					else
 						return 0
 						
-			when String, "string"
-				if typeof @param.toString == "function"
+			when String, 'string'
+				if typeof @param.toString == 'function'
 					@param.toString()
 				else
-					""
+					''
 			
-			when Array, "array"
-				if typeof @param == "object" && Array.isArray @param
+			when Array, 'array'
+				if typeof @param == 'object' && Array.isArray @param
 					return @param
-				else if typeof @param == "string"
+				else if typeof @param == 'string'
 					return @param.split ','
 				else
 					return []
 			
-			when "objectid"
+			when 'objectid'
 				if @param && @param.length? && @param.length == 24
 					try					
 						return Model.objectId @param
@@ -86,11 +86,11 @@ class Param
 				else
 					return false
 			
-			when "raw"
+			when 'raw'
 				return @param
 
 			else
-				if typeof type == "function" && type.name == "ObjectID"
+				if typeof type == 'function' && type.name == 'ObjectID'
 					if @param && @param.length? && @param.length == 24
 						try
 							return type(@param)
@@ -101,12 +101,12 @@ class Param
 				else
 					return null
 	
-	isNull: -> @param == null ||@param == "null"|| @param == "nil"
+	isNull: -> @param == null ||@param == 'null' || @param == 'nil'
 	
-	isEmpty: -> @param == "" ||@param == false|| @isNull()
+	isEmpty: -> @param == '' ||@param == false|| @isNull()
 
 	toString: ->
-		if typeof @param == "undefined"
+		if typeof @param == 'undefined'
 			null
 		else
 			String.prototype.toString.apply @, arguments

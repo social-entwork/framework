@@ -1,4 +1,4 @@
-_ = require "underscore"
+_ = require 'underscore'
 
 class Routes
 	@wildcardRegex:	/:(.*?)\((.*?)\)/

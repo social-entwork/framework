@@ -1,5 +1,3 @@
-express = require 'express'
-connectRedis = require('connect-redis')(express)
 {EventEmitter} = require 'events'
 _ = require 'underscore'
 
@@ -13,7 +11,7 @@ class App extends EventEmitter
       domain: 'app.dev'
       env: 'dev'
 
-    @options.session = _.defaults @options.session || {}, { secret: "secret_token", key: 'app.id' }
+    @options.session = _.defaults @options.session || {}, { secret: 'secret_token', key: 'app.id' }
     @initAuthentication()
     @initSessions()
     @initHttp()

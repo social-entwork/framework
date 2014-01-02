@@ -36,7 +36,7 @@ class Request
           instance.setVerb @method
           instance.execute()
       catch e
-        if e.code != "MODULE_NOT_FOUND"         
+        if e.code != 'MODULE_NOT_FOUND'         
           if @options.app.options.env == "dev"
             throw e
           error =

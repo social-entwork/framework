@@ -16,7 +16,7 @@ class Auth
 			callback? null, @_user, @_mechanism
 			return true
 		
-		if typeof arguments[0] == "function"
+		if typeof arguments[0] == 'function'
 			[options,callback] = [callback,options]
 		
 		if options? && options.blacklist?
